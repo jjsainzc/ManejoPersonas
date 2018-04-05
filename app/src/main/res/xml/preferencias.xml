@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/pref_cat_archivo">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="leer_archivo"
+            android:summary="@string/pref_summ_lectura"
+            android:title="@string/pref_title_lectura" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="guardar_archivo"
+            android:summary="@string/pref_summ_guardado"
+            android:title="@string/pref_title_guardado" />
+
+        <EditTextPreference
+            android:defaultValue="archivo.bin"
+            android:dialogTitle="@string/pref_dia_title_archivo"
+            android:key="nombre_archivo"
+            android:summary="@string/pref_summ_archivo"
+            android:title="@string/pref_title_archivo" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_cat_ordenamiento">
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="ordenamiento_selectivo"
+            android:summary="@string/pref_summ_ordenamiento_selectivo"
+            android:title="@string/pref_title_ordenamiento_selectivo" />
+
+        <ListPreference
+            android:defaultValue="1"
+            android:dialogTitle="@string/pref_dia_title_criterios_ordenamientos"
+            android:entries="@array/ordenamiento_criterio"
+            android:entryValues="@array/ordenamiento_criterio_id"
+            android:key="criterios_ordenamiento"
+            android:summary="@string/pref_summ_criterios_ordenamiento"
+            android:title="@string/pref_title_criterio_ordenamientos" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_cat_comunicaciones">
+        <EditTextPreference
+            android:defaultValue="192.168.1.10:8080"
+            android:dialogTitle="@string/pref_dia_title_hostname"
+            android:key="hostname"
+            android:summary="@string/pref_summ_hostname"
+            android:title="@string/pref_title_hostname" />
+
+        <EditTextPreference
+            android:defaultValue="5"
+            android:dialogTitle="@string/pref_dia_connect_timeout"
+            android:inputType="number"
+            android:key="connect_timeout"
+            android:summary="@string/pref_sum_connect_timeout"
+            android:title="@string/pref_title_connect_timeout" />
+        <EditTextPreference
+            android:defaultValue="5"
+            android:dialogTitle="@string/pref_dia_read_timeout"
+            android:inputType="number"
+            android:key="read_timeout"
+            android:summary="@string/pref_sum_read_timeout"
+            android:title="@string/pref_title_read_timeout" />
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/preferencias"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/preferencias" />
+    </group>
+
+    <item android:title="@string/comunicaciones">
+        <menu>
+
+            <item
+                android:id="@+id/mostrar_objetos"
+                android:icon="@drawable/ic_pagina_3"
+                android:title="@string/mostrar_objetos" />
+            <item
+                android:id="@+id/listado"
+                android:icon="@drawable/ic_action_name"
+                android:title="@string/listado" />
+            <item
+                android:id="@+id/guardar_archivo"
+                android:icon="@drawable/ic_action_save"
+                android:title="@string/guardar_en_archivo" />
+            <item
+                android:id="@+id/leer_webservice"
+                android:icon="@drawable/ic_action_download"
+                android:title="@string/leer_webservice" />
+            <item
+                android:id="@+id/leer_rest"
+                android:icon="@drawable/ic_action_download"
+                android:title="@string/leer_rest" />
+
+            <item
+                android:id="@+id/mapa"
+                android:icon="@drawable/ic_action_map"
+                android:title="@string/mapa" />
+
+        </menu>
+    </item>
+
+</menu>

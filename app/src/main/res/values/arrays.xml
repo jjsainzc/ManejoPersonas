@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="estado_civil">
+        <item>Soltero</item>
+        <item>Casado</item>
+        <item>Divorciado</item>
+        <item>Viudo</item>
+    </string-array>
+    <string-array name="estado_civil_id">
+        <item>SO</item>
+        <item>CA</item>
+        <item>DI</item>
+        <item>VI</item>
+    </string-array>
+
+    <string-array name="ordenamiento_criterio">
+        <item>Nombre</item>
+        <item>Cedula</item>
+        <item>Fecha Nacimiento</item>
+        <item>Estatura</item>
+        <item>Estado Civil</item>
+        <item>Genero</item>
+    </string-array>
+    <string-array name="ordenamiento_criterio_id">
+        <item>nom</item>
+        <item>ced</item>
+        <item>feN</item>
+        <item>est</item>
+        <item>esc</item>
+        <item>gen</item>
+    </string-array>
+
+</resources>

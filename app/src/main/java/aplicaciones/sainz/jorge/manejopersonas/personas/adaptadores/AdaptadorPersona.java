@@ -31,6 +31,13 @@ public class AdaptadorPersona extends ArrayAdapter<Persona> {
     private List<Persona> personas;
 
 
+    /**
+     * Constructor para tomar los datos necesarios
+     *
+     * @param context
+     * @param resource
+     * @param objects
+     */
     public AdaptadorPersona(@NonNull Activity context, int resource, @NonNull List<Persona> objects) {
         super(context, resource, objects);
         this.context = context;
@@ -43,8 +50,8 @@ public class AdaptadorPersona extends ArrayAdapter<Persona> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
          ViewHolder viewHolder;
 
-        /**
-         * Si no esta creado el layout se crea una vez y se vinculan sus atributos en la clase estatica
+        /*
+          Si no esta creado el layout se crea una vez y se vinculan sus atributos en la clase estatica
          */
         if (convertView == null) {
             LayoutInflater inflador = context.getLayoutInflater();
@@ -65,8 +72,8 @@ public class AdaptadorPersona extends ArrayAdapter<Persona> {
             viewHolder = (ViewHolder)convertView.getTag();
         }
 
-        /**
-         * Establecer el estilo de un texto usando Spannable
+        /*
+          Establecer el estilo de un texto usando Spannable
          */
         CharSequence nombre = personas.get(position).getNombre();
         int longitud = nombre.length();
@@ -84,8 +91,8 @@ public class AdaptadorPersona extends ArrayAdapter<Persona> {
         ssb1.setSpan(italicSpan, 0, longitud, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         viewHolder.nombre.setText(ssb1, TextView.BufferType.SPANNABLE);
 
-        /**
-         * Dar estilo usando Html
+        /*
+          Dar estilo usando Html
          */
         viewHolder.cedula.setText(Html.fromHtml("<font color=\"#0F7E0C\"'><b><i>"+personas.get(position).getCedula()+"</b></i></font>"));
 
