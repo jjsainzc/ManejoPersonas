@@ -34,8 +34,8 @@ public class ConexionesRS {
      * @param doOutput       false para GET y true  para PUT o POST ya que fuerza la salida del body
      * @param param          Map que contiene clave=valor para los parametros
      * @param contentType    un contenido valido para el envio, usualmente application/x-www-form-urlencoded;charset=UTF-8
-     * @param accept         un contenido valido para el retorno application7json, application/xml, text/plain
-     * @param data           data que no se envia en los parametros usualemte en POST y PUT
+     * @param accept         un contenido valido para el retorno application/json, application/xml, text/plain
+     * @param data           data que no se envia en los parametros usualmente en POST y PUT
      * @param method         metodo valido GET, POST, PUT, DELETE
      * @param connectTimeout Tiempo maximo de espera en la conexion
      * @param readTimeout    Tiempo maximo de espera en la lectura
