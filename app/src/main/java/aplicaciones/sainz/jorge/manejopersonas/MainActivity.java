@@ -60,6 +60,8 @@ import aplicaciones.sainz.jorge.manejopersonas.utilidades.EntradaSalida;
  *
  * @author Jorge Jesus Sainz Casalla
  * Instructor de lenguajes de programacion
+ *
+ * NOTA: Solo hay uso de ñ en los comentarios, no hay uso de acentos.
  * <p>
  * CEC (Enero-Marzo 2018)
  * <p>
@@ -127,7 +129,7 @@ import aplicaciones.sainz.jorge.manejopersonas.utilidades.EntradaSalida;
  * <p>
  * Inclusion de un mapa en fragmento, adicion de marcas y cambios de visualizacion.
  * <p>
- * Creacion de un proveedor de contenidos que permira la recuperacion e insercion de datos.
+ * Creacion de un proveedor de contenidos que permita la recuperacion e insercion de datos.
  **/
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -147,11 +149,11 @@ public class MainActivity extends AppCompatActivity
     // Variable para el tratamiento de las preferencias
     public static SharedPreferences preferenciasPublicas;
 
-    // Controlador de dos click paea salir de la aplicacion
+    // Controlador de dos click para salir de la aplicacion
     private boolean doubleBackToExitPressedOnce;
 
     /*
-     Atributos para use de base de datos.
+     Atributos para uso de la base de datos.
 
      El apuntador a la base debe ser estatico para que pueda ser usado desde Activites independientes,
      solo esta vivo si la aplicacion esta corriendo, esto significa que para Content Provider, o Services
@@ -482,8 +484,8 @@ public class MainActivity extends AppCompatActivity
             Object valor = persona.getFieldsValues().get(campo);
             /*
               El metodo transformaAtributo2CampoBD transforma los patrones  de escritura
-              nombreAtributo a nombre_atributo para construir un Map cuya clave se cooresponde
-              al nombre normalizado de la base de datos
+              nombreAtributo (camelCase) a nombre_atributo (estilo minuscula) para construir un Map
+              cuya clave se corresponde al nombre normalizado de la base de datos
              */
             registro.put(DatabaseCustomUtils.transformaAtributo2CampoBD(campo), valor);
         }
