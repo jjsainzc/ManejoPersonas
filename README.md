@@ -8,9 +8,9 @@
  NOTA: Solo hay uso de ñ en los comentarios, no hay uso de acentos.
  <p>
  CEC (Enero-Marzo 2018)
+ <pre>
  <p>
- <p>
- Temas que abarca.
+  Temas que abarca.
  -------------------------------------------------------------------------------------------------
  - Diseño general, layouts, uso de componentes, recursos.
  - Patrones de diseños basados en estaticos.
@@ -74,4 +74,4 @@
  Inclusion de un mapa en fragmento, adicion de marcas y cambios de visualizacion.
  <p>
  Creacion de un proveedor de contenidos que permita la recuperacion e insercion de datos.
-
+</pre>
