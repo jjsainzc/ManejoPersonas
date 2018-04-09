@@ -392,7 +392,7 @@ public class Listado extends Fragment {
             mainActivity = (MainActivity) getActivity();
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentListado");
+                    .concat(" must implement OnFragmentListado"));
         }
     }
 
