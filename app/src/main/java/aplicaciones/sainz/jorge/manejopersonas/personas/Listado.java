@@ -449,7 +449,12 @@ public class Listado extends Fragment {
         adaptadorPersona.notifyDataSetChanged();
     }
 
-
+    /**
+     * Publicacion para el uso del atributo estatico usado para establecer la direccion de
+     * ordenamiento en la clase externa CompararPersonas, que implementa el Comparator
+     *
+     * @return
+     */
     public static int getDireccionOrdenamiento() {
         return direccionOrdenamiento;
     }
