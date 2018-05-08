@@ -21,6 +21,11 @@ import java.util.Map;
 import aplicaciones.sainz.jorge.manejopersonas.personas.Listado;
 import aplicaciones.sainz.jorge.manejopersonas.personas.conversores.ConversorPersona;
 
+/**
+ * Creacion de una anotacion personalizada que nos va a permitir la exclusion de atributos
+ * para el tratamiento por reflexion de los mismos.
+ * Hay muchas formas de construir anotaciones personalizadas.
+ */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @interface MiAnotacionPersona {
@@ -34,6 +39,11 @@ import aplicaciones.sainz.jorge.manejopersonas.personas.conversores.ConversorPer
  * POJO tiene las implementaciones basica para que una clase sea manejable en muchas operaciones.
  * <p>
  * Incluye sobreescritura de metodos heredados de Object
+ * Incluye implementacion de tres interfaces basicas.
+ * Serializable - Permite el manejo del objto en Entrada/Salida.
+ * Comparable<T> - Permite dotar al objeto del metodo compareTo(<T>)
+ * Parcelable - Permite convertir al objeto en un elemento eficiente para el paso entre Activities
+ *              (solo para Android)
  */
 
 public class Persona implements Serializable, Comparable<Persona>, Parcelable {
@@ -45,6 +55,7 @@ public class Persona implements Serializable, Comparable<Persona>, Parcelable {
     @MiAnotacionPersona(name = "excluir", value = "si")
     private Integer personaId;
 
+    // ATRIBUTOS PRIVADOS !! NO ROMPER LA ENCAPSULACION
     private String nombre;
     private String cedula;
     private Date fechaNacimiento;
@@ -53,10 +64,23 @@ public class Persona implements Serializable, Comparable<Persona>, Parcelable {
     private Double estatura;
 
 
+    /**
+     * Constructor vacio (sin parametros) es obligatorio
+     */
     public Persona() {
         personaId = -1;
     }
 
+    /**
+     * Constructor sobrecargado, es opcional.
+     *
+     * @param nombre
+     * @param cedula
+     * @param fechaNacimiento
+     * @param estadoCivil
+     * @param genero
+     * @param estatura
+     */
     public Persona(String nombre, String cedula, Date fechaNacimiento, String estadoCivil, String genero, Double estatura) {
         this.nombre = nombre;
         this.cedula = cedula;
@@ -67,6 +91,13 @@ public class Persona implements Serializable, Comparable<Persona>, Parcelable {
         personaId = -1;
     }
 
+    /*
+    ===============================================================
+    METODOS PUBLICOS GETTER Y SETTER (publicos)
+
+    Son obligatorios para manejar los valores de los atributos
+    ===============================================================
+    */
     public String getNombre() {
         return nombre;
     }
@@ -137,6 +168,13 @@ public class Persona implements Serializable, Comparable<Persona>, Parcelable {
         return gson.toJson(this);
     }
 
+    /**
+     * Metodo sobreescrito de la clase Object, en este caso lo usamos para devolver un
+     * formato Json que representa al objeto, esto puede ser usado bajo el criterio que se
+     * desee.
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return toJson();
@@ -153,6 +191,13 @@ public class Persona implements Serializable, Comparable<Persona>, Parcelable {
         */
     }
 
+    /**
+     * Metodo sobreescrito de la clase Object que permite establecer un criterio unico para
+     * la comparacion del POJO
+     *
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -161,11 +206,31 @@ public class Persona implements Serializable, Comparable<Persona>, Parcelable {
         return getCedula().equals(persona.getCedula());
     }
 
+    /**
+     * Metodo sobreescrito de la clase Object
+     * Permite devolver un id unico para ser usados en Hashing
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         return getCedula().hashCode();
     }
 
+    /**
+     * Metodo sobreescrito de la interface Comparable
+     * Permite establece un valor inicial para realizar comparaciones del POJO
+     * <p>
+     * Este puede ser complementando en clase externa con interface Comparator
+     *
+     * @param o Entra un objeto persona.
+     * @return Tres valores de int (<0, ==0, > 0), que significan si es menor, igual o mayor, la
+     * implementacion de esta tecnica viene del C de restar los objetos a comparar,
+     * Ejemplo:
+     * Si a = 40 y b = 50,
+     * Si a-b < 0
+     * Entonces a < b (a es menor que b)
+     */
     @Override
     public int compareTo(@NonNull Persona o) {
 
@@ -173,6 +238,10 @@ public class Persona implements Serializable, Comparable<Persona>, Parcelable {
     }
 
 
+    /**
+     * PARCELABLE
+     * ========================================================================================
+     */
     @Override
     public int describeContents() {
         return 0;
@@ -200,6 +269,9 @@ public class Persona implements Serializable, Comparable<Persona>, Parcelable {
         this.personaId = in.readInt();
     }
 
+    /**
+     * Excluimos la constante interna del Parcelable de la reflexion
+     */
     @MiAnotacionPersona(name = "excluir", value = "si")
     public static final Parcelable.Creator<Persona> CREATOR = new Parcelable.Creator<Persona>() {
         @Override
@@ -212,11 +284,18 @@ public class Persona implements Serializable, Comparable<Persona>, Parcelable {
             return new Persona[size];
         }
     };
+    // ===========================================================================================
 
     /**
+     * USO DE REFLEXION
+     *
      * Metodo que devuelve en un Map todos los atributos y sus valores
      * que NO esten marcados con la anotacion personalizada MiAnotacion con
      * name="excluir" y value="si"
+     *
+     * Solo es posible devolver la estructura del objeto mediante un metodo publico, ya
+     * que es el unico que puede ver los atributos privados del mismo, tampoco es posible usar esto
+     * con elementos estaticos, ya que los mismos solo se ven por referencia a la clase.
      */
     public Map<String, Object> getFieldsValues() {
         Map<String, Object> resultado = new LinkedHashMap<>();

@@ -524,7 +524,7 @@ public class MainActivity extends AppCompatActivity
 
 
     /**
-     * Exporta la lista a un archivo XML
+     * Retorna una lista en formato XML a partir de una coleccion
      * Uso de conversores personalizados
      *
      * @return

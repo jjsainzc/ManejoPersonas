@@ -99,6 +99,7 @@ public class GoogleMapsFragmento extends Fragment {
     // Lista de lugares
     private List<Lugar> lugares;
 
+    // Objeto para manejar el apuntador a la clase padre
     private MainActivity mainActivity;
 
     static {
@@ -142,7 +143,7 @@ public class GoogleMapsFragmento extends Fragment {
         View rootView = inflater.inflate(R.layout.content_main, container, false);
         /*
         Si el fragmento no esta creado, se invoca al manejador de fragmentos del mapa, y se
-        lanza en el FrameLayout del layout que ya definido para la clase MainActivity, no es
+        lanza en el FrameLayout del layout que ya estaba definido para la clase MainActivity, no es
         necesario hacer otro layout adicional para esto.
          */
         if (mapFragment == null) {
@@ -190,6 +191,11 @@ public class GoogleMapsFragmento extends Fragment {
     public void onButtonPressed(Uri uri) {
     }
 
+    /**
+     * Vinculacion del apuntador a la actividad padre
+     *
+     * @param context
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -197,6 +203,9 @@ public class GoogleMapsFragmento extends Fragment {
 
     }
 
+    /**
+     * Desvinculacion del apuntador a la actividad padre
+     */
     @Override
     public void onDetach() {
         super.onDetach();
@@ -204,6 +213,13 @@ public class GoogleMapsFragmento extends Fragment {
         mainActivity = null;
     }
 
+    /**
+     * Creacion del menu superior, esta usada la modalidad dinamica
+     * pero los titulos estan manejados en los recursos
+     *
+     * @param menu
+     * @param inflater
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -215,6 +231,11 @@ public class GoogleMapsFragmento extends Fragment {
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
     }
 
+    /**
+     * Manejo de la accion del menu superior
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getTitle().equals(getResources().getString(R.string.cambiar_tipo_mapa))) {

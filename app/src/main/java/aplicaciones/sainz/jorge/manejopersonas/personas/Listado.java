@@ -43,6 +43,8 @@ import aplicaciones.sainz.jorge.manejopersonas.utilidades.EntradaSalida;
 
 /**
  * Fragmento que es lanzado inicialmente para el control de la lista de Persona
+ *
+ * No se puede aplicar el patron de diseño Singleton al fragmento
  */
 public class Listado extends Fragment {
     // Variable a ser usada en el control del lanzamiento del formulario
@@ -89,6 +91,10 @@ public class Listado extends Fragment {
     private Intent formulario;
     private SimpleDateFormat patronFechaSQL;
 
+    /**
+     * Constructor de la clase que hereda del Fragment solo
+     * puede ir public.
+     */
     public Listado() {
         patronFechaSQL = new SimpleDateFormat("yyyy-MM-dd");
     }
@@ -384,6 +390,11 @@ public class Listado extends Fragment {
         return super.onContextItemSelected(item);
     }
 
+    /**
+     * Asociamos el callback
+     *
+     * @param context
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -396,6 +407,9 @@ public class Listado extends Fragment {
         }
     }
 
+    /**
+     * Desvinculamos el callback
+     */
     @Override
     public void onDetach() {
         super.onDetach();

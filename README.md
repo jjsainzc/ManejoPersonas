@@ -20,7 +20,7 @@
  - Estilos de texto usando Spannable y Html
  - Eventos con declaraciones en clase y en componentes
  - Preferencias publicas del usuario, usando fragmento.
- - Dialogos.
+ - Dialogos de seleccion simple y de tipo alerta.
  - Entrada/Salida, flujos de bytes y caracteres
  - Ordenamiento dinamicos de lista usando Comparator
  - Componente y tratamiento de fecha.
@@ -28,7 +28,7 @@
  - Lanzamiento de Activities, simples y en espera de un resultado.
  - Parcelables.
  - Validacion de datos de un formulario usando expresiones regulares y
- base de datos para evitar repeticiones de campos unicos
+   base de datos para evitar repeticiones de datos en campos unicos
  - Uso de fragmentos dinamicos y callbacks, paso de parametros por arguments.
  - Uso de XML y Json para serializar objetos y guardar archivo.
  - Conversores personalizados para Gson y Xstream
@@ -36,24 +36,29 @@
  - Uso de anotaciones y reflexion para construir coleccion de atributos y valores
  - Creacion de proceso en segundo plano usando una clase que hereda de AsyncTask
  - Uso de metodo estatico en clase utilitaria para hacer conexion universal a RESTfull y
- Servlet, asi como tambien para scripts de PHP siempre y cuando devuelvan un codigo
- HTML correcto.
+   Servlet, asi como tambien para scripts de PHP siempre y cuando devuelvan un codigo
+   HTML correcto.
  - Formateo de XML (utilidad).
  - Guardado de un archivo XML que representa el listado en el DOWNLOADS con el nombre
  personas.xml
  - Lectura de un webservice tipo SOAP
- NOTA: Cuando se usa ksoap2-android-assembly-2.4-jar-with-dependencies.jar, no se puede
- usar xmlpull-1.1.3.1.jar de XStream porque entran en conflicto de multiDex, entonces
- dejar solo la biblioteca de ksoap
+ 
+ NOTAS: 
+ - Cuando se usa ksoap2-android-assembly-2.4-jar-with-dependencies.jar, no se puede
+   usar xmlpull-1.1.3.1.jar de XStream porque entran en conflicto de multiDex, entonces
+   dejar solo la biblioteca de ksoap
  - Trabajo con mapas, lectura, adicion de marcas, cambios de visualizacion.
  - Proveedor de contenido, definicion y creacion de acciones.
+ - El uso del patron de dise&ntilde;o Singleton, no se puede aplicar en los fragmentos,
+   los metodos newInstance que estan creados en cada uno, solo facilitan el manejo del mismo.
  -----------------------------------------------------------------------------------------------
  <p>
  Funcionalidad general
  <p>
  A partir de un objeto Persona (POJO) realizar un mantenimiento de datos usando una pantalla de
  fragment_listado (Listado) que tiene la responsabilidad de adicionar, modificar, borrar y ordenar
- los mismos, una segunda pantalla (Formulario) es la que realiza las acciones  de adicionar y modificacion.
+ los mismos, una segunda pantalla (Formulario) es la que realiza las acciones  de adicionar y 
+ modificacion.
  <p>
  La pantalla de Listado puede cambiar el ordenamiento mediante un menu superior.
  <p>
