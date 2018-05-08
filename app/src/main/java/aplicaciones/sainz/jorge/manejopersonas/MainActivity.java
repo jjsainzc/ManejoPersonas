@@ -270,12 +270,23 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Metodo para la creacion del menu superior
+     *
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
+    /**
+     * Metodos para el tratamiento del menu superior (accion realizada)
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
