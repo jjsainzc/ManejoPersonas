@@ -117,7 +117,7 @@ public class PersonaCP extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        // Hay que pasarle los parametros que corresponden a la base de datos que debe estar creada.
+        // Hay que pasarle los parametros que corresponden a la base de datos que debe estar usada.
         base = new BasePersonas(getContext(), "base_datos.db", 1);
         return false;
     }
