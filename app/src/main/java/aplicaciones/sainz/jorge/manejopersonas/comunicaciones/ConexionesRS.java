@@ -1,5 +1,7 @@
 package aplicaciones.sainz.jorge.manejopersonas.comunicaciones;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,6 +39,8 @@ public class ConexionesRS {
      * @param accept         un contenido valido para el retorno application/json, application/xml, text/plain
      * @param data           data que no se envia en los parametros usualmente en POST y PUT
      * @param method         metodo valido GET, POST, PUT, DELETE
+     * @param authToken      Si este campo esta lleno se refiere a un token jwt, para suar con un encabezado
+     *                       Authorization: Bearer header.payload.signAlg
      * @param connectTimeout Tiempo maximo de espera en la conexion
      * @param readTimeout    Tiempo maximo de espera en la lectura
      * @return Map [code=,message=,body=]
@@ -51,6 +55,7 @@ public class ConexionesRS {
                                                                String accept,
                                                                String data,
                                                                String method,
+                                                               String authToken,
                                                                int connectTimeout,
                                                                int readTimeout) throws IOException {
 
@@ -88,17 +93,18 @@ public class ConexionesRS {
             connection.setRequestProperty("Content-Type", contentType);
             //connection.setRequestProperty("Content-Length", Integer.toString(paramStr.length()));
             connection.setRequestProperty("Accept", accept);
+            if (!authToken.isEmpty()) {
+                connection.setRequestProperty("Authorization", "Bearer ".concat(authToken));
+            }
 
             connection.setConnectTimeout(connectTimeout);
             connection.setReadTimeout(readTimeout);
-
 
             if ((data != null) && (!data.isEmpty())) {
                 OutputStreamWriter osw = new OutputStreamWriter(connection.getOutputStream());
                 osw.write(data);
                 osw.flush();
                 osw.close();
-
             }
             code = connection.getResponseCode();
 
@@ -167,7 +173,7 @@ public class ConexionesRS {
                                                                Map<String, String> param,
                                                                String contentType,
                                                                String data,
-                                                               String method) throws IOException {
+                                                               String method, String auth) throws IOException {
 
         return connectREST(urlStr,
                 script,
@@ -177,7 +183,7 @@ public class ConexionesRS {
                 contentType,
                 "application/json",
                 data,
-                method, 5000, 5000);
+                method, auth, 5000, 5000);
 
     }
 
@@ -185,7 +191,9 @@ public class ConexionesRS {
                                                                String script,
                                                                Map<String, String> param,
                                                                String data,
-                                                               String method) throws IOException {
+                                                               String method,
+                                                               String auth
+    ) throws IOException {
 
         return connectREST(urlStr,
                 script,
@@ -196,7 +204,9 @@ public class ConexionesRS {
                 "application/json",
                 data,
                 method,
-                5000, 5000);
+                auth,
+                5000,
+                5000);
 
     }
 
@@ -205,6 +215,7 @@ public class ConexionesRS {
                                                                Map<String, String> param,
                                                                String data,
                                                                String method,
+                                                               String auth,
                                                                int connectTimeout,
                                                                int readTimeout) throws IOException {
 
@@ -217,6 +228,7 @@ public class ConexionesRS {
                 "application/json",
                 data,
                 method,
+                auth,
                 connectTimeout,
                 readTimeout);
 
@@ -229,6 +241,7 @@ public class ConexionesRS {
                                                                String accept,
                                                                String data,
                                                                String method,
+                                                               String auth,
                                                                int connectTimeout,
                                                                int readTimeout) throws IOException {
 
@@ -241,6 +254,7 @@ public class ConexionesRS {
                 accept,
                 data,
                 method,
+                auth,
                 connectTimeout,
                 readTimeout);
 

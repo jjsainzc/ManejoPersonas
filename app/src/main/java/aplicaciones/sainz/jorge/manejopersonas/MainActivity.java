@@ -34,6 +34,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 
+import org.apache.commons.codec.binary.Base64;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.File;
@@ -52,6 +53,10 @@ import aplicaciones.sainz.jorge.manejopersonas.personas.datos.Persona;
 import aplicaciones.sainz.jorge.manejopersonas.preferencias.Preferencias;
 import aplicaciones.sainz.jorge.manejopersonas.utilidades.DatabaseCustomUtils;
 import aplicaciones.sainz.jorge.manejopersonas.utilidades.EntradaSalida;
+
+import static aplicaciones.sainz.jorge.manejopersonas.comunicaciones.JWT.createToken;
+import static aplicaciones.sainz.jorge.manejopersonas.comunicaciones.JWT.decodeToken;
+import static aplicaciones.sainz.jorge.manejopersonas.comunicaciones.JWT.verifyToken;
 
 /**
  * Ejemplo Manejo de personas
@@ -580,9 +585,27 @@ public class MainActivity extends AppCompatActivity
         // El hostname y el puerto es usualmente configurado en las preferencias
         String hostname = preferenciasPublicas.getString("hostname", "192.168.1.11:8080");
 
+
+        /*
+        Secuencia de pasos para craer un token JWT que permita validar el uso del RESTfull
+         */
+        String secretKey = "e6K0v3I5s4B2l9G8";
+        String payload = "{user: \"test\", pass: \"test\"}";
+        String signatureAlg = "HS512";
+
+        String auth = createToken(secretKey, payload, signatureAlg);
+        /*
+           header {
+               Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ7dXNlcjogXCJ0ZXN0XCIsIHBhc3M6IFwidGVzdFwifSJ9.NZWR5S2WNHzq-K5NxknR-lbRdsNmCPUg3CERQwGqjX3QTr1cK8C8f7XiLi0RBRm7cHK1LydfHq1j0XGwmhqt4A
+           }
+         */
+        if (verifyToken(secretKey, auth, signatureAlg)) {
+            Log.i("DEC_TOKEN", decodeToken(auth).get("body").toString());
+        }
+
         /*
         Los parametros del metodo estan documentados dentro de la clase
-         */
+        */
         resultado = ConexionesRS.connectREST(
                 "http://" + hostname + "/" + resource,
                 "/" + script,
@@ -591,11 +614,14 @@ public class MainActivity extends AppCompatActivity
                 "application/xml",
                 "",
                 "GET",
+                auth,
                 Integer.parseInt(preferenciasPublicas.getString("read_timeout", "10")) * 1000,
                 Integer.parseInt(preferenciasPublicas.getString("connect_timeout", "10")) * 1000);
 
         return resultado;
     }
+
+
     /**
      * ============================================================================================
      */
@@ -683,7 +709,7 @@ public class MainActivity extends AppCompatActivity
                     xml = leerSOAP();
                 }
                 if (tipo.equalsIgnoreCase("REST")) {
-                    resultado = leerRS("AndroidBaseDatos/webresources", "personas_rs");
+                    resultado = leerRS("AndroidBaseDatos/public", "personas_rs");
                     // Si el codigo de retorno no es del rango de los 200 hay algun inconveniente
                     if (Integer.parseInt(resultado.get("code")) < 300) {
                         xml = resultado.get("body");
