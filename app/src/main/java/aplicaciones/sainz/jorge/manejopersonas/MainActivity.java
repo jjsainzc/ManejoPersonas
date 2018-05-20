@@ -110,6 +110,7 @@ import static aplicaciones.sainz.jorge.manejopersonas.comunicaciones.JWT.verifyT
  * dejar solo la biblioteca de ksoap
  * - Trabajo con mapas, lectura, adicion de marcas, cambios de visualizacion.
  * - Proveedor de contenido, definicion y creacion de acciones.
+ * - Uso de generacion de token JWT para enviar autorizacion en base a roles
  * -----------------------------------------------------------------------------------------------
  * <p>
  * Funcionalidad general
