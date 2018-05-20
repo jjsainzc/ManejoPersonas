@@ -30,6 +30,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
@@ -51,6 +52,7 @@ import aplicaciones.sainz.jorge.manejopersonas.conversores.ConversorDouble;
 import aplicaciones.sainz.jorge.manejopersonas.conversores.ConversorFecha;
 import aplicaciones.sainz.jorge.manejopersonas.personas.datos.Persona;
 import aplicaciones.sainz.jorge.manejopersonas.preferencias.Preferencias;
+import aplicaciones.sainz.jorge.manejopersonas.utilidades.Auth;
 import aplicaciones.sainz.jorge.manejopersonas.utilidades.DatabaseCustomUtils;
 import aplicaciones.sainz.jorge.manejopersonas.utilidades.EntradaSalida;
 
@@ -589,8 +591,22 @@ public class MainActivity extends AppCompatActivity
         /*
         Secuencia de pasos para craer un token JWT que permita validar el uso del RESTfull
          */
+
+        /*
+        El payload se construye en base a alguna estructura de datos que pueda manejar
+        usuario, contraseña y perfile de trabajo
+         */
+        List<String> roles = new ArrayList();
+        roles.add("read");
+        roles.add("write");
+        roles.add("detele");
+
+        String payload = new Gson().toJson(new Auth("admin", "admin", roles));
+        /*
+        Estos parametros pueden situarse en preferencias fijas o publicas segun se
+        necesite.
+         */
         String secretKey = "e6K0v3I5s4B2l9G8";
-        String payload = "{user: \"test\", pass: \"test\"}";
         String signatureAlg = "HS512";
 
         String auth = createToken(secretKey, payload, signatureAlg);
