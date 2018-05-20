@@ -67,7 +67,7 @@ import static aplicaciones.sainz.jorge.manejopersonas.comunicaciones.JWT.verifyT
  *
  * @author Jorge Jesus Sainz Casalla
  * Instructor de lenguajes de programacion
- *
+ * <p>
  * NOTA: Solo hay uso de ñ en los comentarios, no hay uso de acentos.
  * <p>
  * CEC (Enero-Marzo 2018)
@@ -292,6 +292,7 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * Metodos para el tratamiento del menu superior (accion realizada)
+     *
      * @param item
      * @return
      */
@@ -576,6 +577,7 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * Metodo para leer un webservice tipo Jersey (RESTfull) o Servlet
+     * Se ha implementado la seguridad JWT
      *
      * @param resource Recurso o nombre de la aplicacion web a ejecutar
      * @param script   Endpoint, path o metodo a ejecutar
@@ -595,12 +597,10 @@ public class MainActivity extends AppCompatActivity
 
         /*
         El payload se construye en base a alguna estructura de datos que pueda manejar
-        usuario, contraseña y perfile de trabajo
+        usuario, contraseña y perfile de trabajo, y se convierte a JSON
          */
         List<String> roles = new ArrayList();
         roles.add("read");
-        roles.add("write");
-        roles.add("detele");
 
         String payload = new Gson().toJson(new Auth("admin", "admin", roles));
         /*
@@ -612,28 +612,29 @@ public class MainActivity extends AppCompatActivity
 
         String auth = createToken(secretKey, payload, signatureAlg);
         /*
+           Ejemplo del header que se va a adicionar en el request del RESTfull
            header {
                Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ7dXNlcjogXCJ0ZXN0XCIsIHBhc3M6IFwidGVzdFwifSJ9.NZWR5S2WNHzq-K5NxknR-lbRdsNmCPUg3CERQwGqjX3QTr1cK8C8f7XiLi0RBRm7cHK1LydfHq1j0XGwmhqt4A
            }
          */
         if (verifyToken(secretKey, auth, signatureAlg)) {
             Log.i("DEC_TOKEN", decodeToken(auth).get("body").toString());
+            /*
+            Los parametros del metodo estan documentados dentro de la clase
+            */
+            resultado = ConexionesRS.connectREST(
+                    "http://" + hostname + "/" + resource,
+                    "/" + script,
+                    new HashMap(),
+                    "application/x-www-form-urlencoded;charset=UTF-8",
+                    "application/xml",
+                    "",
+                    "GET",
+                    auth,
+                    Integer.parseInt(preferenciasPublicas.getString("read_timeout", "10")) * 1000,
+                    Integer.parseInt(preferenciasPublicas.getString("connect_timeout", "10")) * 1000);
         }
 
-        /*
-        Los parametros del metodo estan documentados dentro de la clase
-        */
-        resultado = ConexionesRS.connectREST(
-                "http://" + hostname + "/" + resource,
-                "/" + script,
-                new HashMap(),
-                "application/x-www-form-urlencoded;charset=UTF-8",
-                "application/xml",
-                "",
-                "GET",
-                auth,
-                Integer.parseInt(preferenciasPublicas.getString("read_timeout", "10")) * 1000,
-                Integer.parseInt(preferenciasPublicas.getString("connect_timeout", "10")) * 1000);
 
         return resultado;
     }
