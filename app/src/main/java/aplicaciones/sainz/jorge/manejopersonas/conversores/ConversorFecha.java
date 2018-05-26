@@ -44,7 +44,7 @@ public class ConversorFecha implements Converter {
         }
 
         // Forzamos el patron de fecha para que coincida con el servidor
-        datePat = "yyyy-MM-dd";
+        //datePat = "yyyy-MM-dd";
         sdf = new SimpleDateFormat(datePat);
     }
 

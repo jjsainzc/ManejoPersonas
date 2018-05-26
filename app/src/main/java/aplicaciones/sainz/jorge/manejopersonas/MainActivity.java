@@ -73,6 +73,7 @@ import static aplicaciones.sainz.jorge.manejopersonas.comunicaciones.JWT.verifyT
  * CEC (Enero-Marzo 2018)
  * <p>
  * <p>
+ * <pre>
  * Temas que abarca.
  * -------------------------------------------------------------------------------------------------
  * - Diseño general, layouts, uso de componentes, recursos.
@@ -112,6 +113,7 @@ import static aplicaciones.sainz.jorge.manejopersonas.comunicaciones.JWT.verifyT
  * - Proveedor de contenido, definicion y creacion de acciones.
  * - Uso de generacion de token JWT para enviar autorizacion en base a roles
  * -----------------------------------------------------------------------------------------------
+ * </pre>
  * <p>
  * Funcionalidad general
  * <p>
@@ -416,14 +418,17 @@ public class MainActivity extends AppCompatActivity
 
 
     /**
+     * <pre>
      * ==============================================================================
-     * CALLBACKS DE LA INTERFACE LISTADO
-     * <p>
+     * <b>CALLBACKS DE LA INTERFACE LISTADO</b>
+     *
      * Metodos callbacks de Listado que son usados para mantener la lista de personas
      * local a esta actividad principal ya que en el menu lateral hay una opcion
      * de guardado manual, es necesario realizar tambien las operacion con la base
      * de datos
+     *
      * ===============================================================================
+     * </pre>
      */
     @Override
     public void onListaAdicion(Persona persona) {

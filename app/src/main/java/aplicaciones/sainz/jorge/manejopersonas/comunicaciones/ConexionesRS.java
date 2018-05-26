@@ -17,7 +17,7 @@ import java.util.Map;
 
 
 /**
- * Created by JJSC on 30/07/2016.
+ *  @author Created by JJSC on 30/07/2016.
  * <p>
  * Conexion universal para RESTfull y Servlets.
  * Tambien puede usarse para scripts de PHP con GET y POST
@@ -29,6 +29,7 @@ public class ConexionesRS {
 
     /**
      * Metodo universal para conectar RETfull y Servlet
+     * @author Jorge Sainz, 2017
      *
      * @param urlStr         http://host:port/resource
      * @param script         metodo
