@@ -27,7 +27,7 @@ import java.util.Map;
  * Para el caso de Android se puede adicionar en el gradle
  * implementation 'io.jsonwebtoken:jjwt:0.9.0'
  * <p>
- * En ambos casos se debe usar lagun mecanismo para codificar/decodificar base64
+ * En ambos casos se debe usar algun mecanismo para codificar/decodificar base64
  * commons-codec-1.7.jar
  *
  * @author ALIENWARE

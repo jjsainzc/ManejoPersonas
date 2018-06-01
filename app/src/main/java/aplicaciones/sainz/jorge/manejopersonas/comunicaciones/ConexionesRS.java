@@ -40,7 +40,7 @@ public class ConexionesRS {
      * @param accept         un contenido valido para el retorno application/json, application/xml, text/plain
      * @param data           data que no se envia en los parametros usualmente en POST y PUT
      * @param method         metodo valido GET, POST, PUT, DELETE
-     * @param authToken      Si este campo esta lleno se refiere a un token jwt, para suar con un encabezado
+     * @param authToken      Si este campo esta lleno se refiere a un token jwt, para usar con un encabezado
      *                       Authorization: Bearer header.payload.signAlg
      * @param connectTimeout Tiempo maximo de espera en la conexion
      * @param readTimeout    Tiempo maximo de espera en la lectura

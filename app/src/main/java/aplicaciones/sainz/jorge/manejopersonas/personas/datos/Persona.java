@@ -46,6 +46,7 @@ import aplicaciones.sainz.jorge.manejopersonas.personas.conversores.ConversorPer
  *              (solo para Android)
  */
 
+
 public class Persona implements Serializable, Comparable<Persona>, Parcelable {
     // Excluimos el atributo de la reflexion
     @MiAnotacionPersona(name = "excluir", value = "si")

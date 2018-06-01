@@ -23,10 +23,11 @@ import java.util.logging.Logger;
  * @author JJSC
  */
 public class ConversorDouble implements Converter {
+    /* Atributo privado */
     private NumberFormat nf;
 
-    /**
-     * Toma el formato del numero
+    /*
+      Toma el formato del numero
      */
     public ConversorDouble() {
         nf = NumberFormat.getInstance(Locale.getDefault());
