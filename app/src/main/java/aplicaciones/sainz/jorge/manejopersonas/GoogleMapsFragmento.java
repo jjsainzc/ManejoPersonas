@@ -161,6 +161,18 @@ public class GoogleMapsFragmento extends Fragment {
                         @Override
                         public void onMapLoaded() {
                             progreso.dismiss();
+                            /*
+                               Ejemplo de evento click en el mapa que pone una marca y una descripcion
+                             */
+                            mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                                @Override
+                                public void onMapClick(LatLng latLng) {
+                                    mMap.addMarker(new MarkerOptions()
+                                            .position(latLng)
+                                            .title(latLng.toString())
+                                    );
+                                }
+                            });
                         }
                     });
 
@@ -223,12 +235,18 @@ public class GoogleMapsFragmento extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+
         menu.add(R.string.cambiar_tipo_mapa)
                 .setIcon(R.drawable.ic_show_layers)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         menu.add(R.string.adicionar_lugares)
                 .setIcon(R.drawable.ic_action_add_location)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        menu.add(R.string.clean_m)
+                .setIcon(R.drawable.ic_pin_drop)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+
+
     }
 
     /**
@@ -240,6 +258,12 @@ public class GoogleMapsFragmento extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getTitle().equals(getResources().getString(R.string.cambiar_tipo_mapa))) {
             cambiarTipoMapa();
+        }
+        if (item.getTitle().equals(getResources().getString(R.string.clean_m))) {
+            /*
+              Limpia el mapa de todas las marcas
+             */
+            mMap.clear();
         }
         if (item.getTitle().equals(getResources().getString(R.string.adicionar_lugares))) {
             LatLng l = CEC;

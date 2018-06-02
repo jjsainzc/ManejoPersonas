@@ -80,4 +80,5 @@
     <string name="seleccione_tipo_mapa">Seleccione el tipo</string>
     <string name="cargando_mapa">Cargando Mapa...</string>
     <string name="espere">Espere ....</string>
+    <string name="clean_m">Limpiar</string>
 </resources>
