@@ -81,4 +81,6 @@
     <string name="cargando_mapa">Cargando Mapa...</string>
     <string name="espere">Espere ....</string>
     <string name="clean_m">Limpiar</string>
+    <string name="autor">\@JJSC, 2018</string>
+    <string name="ejemplo_de_clases_manejo_de_personas">Ejemplo de Clases\nMANEJO DE PERSONAS\nMódulos 1 y 2</string>
 </resources>
