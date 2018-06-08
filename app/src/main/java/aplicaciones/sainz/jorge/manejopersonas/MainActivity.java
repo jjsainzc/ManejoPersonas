@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,11 +24,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -162,6 +167,8 @@ public class MainActivity extends AppCompatActivity
     // Controlador de dos click para salir de la aplicacion
     private boolean doubleBackToExitPressedOnce;
 
+    private TextView email;
+
     /*
      Atributos para uso de la base de datos.
 
@@ -189,6 +196,7 @@ public class MainActivity extends AppCompatActivity
 
         personas = new ArrayList<>();
 
+
         // Para entrada/salida
         dirPrivado = getApplicationContext().getFilesDir().getAbsolutePath();
         dirPublico = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
@@ -212,6 +220,20 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        /*
+           Control sobre el encabezado del navigator
+         */
+        String url = "<a  href=\"mailto:jjsainzc@gmail.com\"><font color=\"white\">EMail: Jorge J. Sainz</font></a>";
+        /* Recuperamos el header del navigator */
+        View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
+        email = headerView.findViewById(R.id.email);
+        /* Convierte el url en texto formateado */
+        email.setText(Html.fromHtml(url));
+        /* Pone colo blanco al link */
+        email.setLinkTextColor(Color.WHITE);
+        /* Establece la accion segun el link definido */
+        email.setMovementMethod(LinkMovementMethod.getInstance());
+
 
         // Trata el fondo y le pone una imagen como marca de agua
         fondo = contenedor.getBackground();
