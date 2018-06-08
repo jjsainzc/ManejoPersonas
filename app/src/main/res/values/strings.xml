@@ -11,7 +11,8 @@
     <string name="preferencias">Preferencias</string>
     <string name="listado">Listado</string>
     <string name="otra_pagina">Otra pagina</string>
-    <string name="comunicaciones">Utilidades/Comunicaciones</string>
+    <string name="comunicaciones">Comunicaciones</string>
+    <string name="utilidades">Utilidades</string>
     <string name="guardar_en_archivo">Guardar en archivo XML</string>
     <string name="nombre">Nombre</string>
     <string name="cedula">Cedula</string>
