@@ -6,8 +6,6 @@
  Instructor de lenguajes de programacion
 
  NOTA: Solo hay uso de ñ en los comentarios, no hay uso de acentos.
- <p>
- CEC (Enero-Marzo 2018)
  <pre>
  <p>
   Temas que abarca.
