@@ -41,11 +41,18 @@
 
     <PreferenceCategory android:title="@string/pref_cat_comunicaciones">
         <EditTextPreference
-            android:defaultValue="192.168.1.10:8080"
+            android:defaultValue="jjsc.ddns.net:8282"
             android:dialogTitle="@string/pref_dia_title_hostname"
             android:key="hostname"
             android:summary="@string/pref_summ_hostname"
             android:title="@string/pref_title_hostname" />
+
+        <EditTextPreference
+            android:defaultValue="jjsc.ddns.net:8181"
+            android:dialogTitle="@string/hostname_rest_label"
+            android:key="hostname_rest"
+            android:summary="@string/pref_summ_hostname_rest"
+            android:title="@string/pref_title_hostname_rest" />
 
         <EditTextPreference
             android:defaultValue="5"

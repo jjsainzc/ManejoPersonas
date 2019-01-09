@@ -64,9 +64,11 @@
     <string name="leyendo_espere">LEYENDO ESPERE ...</string>
     <string name="operacion_cancelada">Operacion cancelada</string>
     <string name="pref_cat_comunicaciones">Comunicaciones</string>
-    <string name="pref_dia_title_hostname">Nombre o IP del servidor\n(Sin http://)</string>
-    <string name="pref_summ_hostname">Servidor dondese encuentran los servicios</string>
-    <string name="pref_title_hostname">Servidor</string>
+    <string name="pref_dia_title_hostname">Nombre o IP del servidor con puerto\n (Sin http://)</string>
+    <string name="pref_summ_hostname">Servidor para webservice SOAP (Glassfish)</string>
+    <string name="pref_summ_hostname_rest">Servidor para webservice REST (PHP/Slim/Eloquent/JWT)</string>
+    <string name="pref_title_hostname">Servidor SOAP</string>
+    <string name="pref_title_hostname_rest">Servidor REST </string>
     <string name="leer_rest">Leer RESTfull</string>
     <string name="lectura">Lectura</string>
     <string name="pref_title_connect_timeout">Tiempo Conexion</string>
@@ -84,4 +86,5 @@
     <string name="clean_m">Limpiar</string>
     <string name="autor">\@JJSC, 2018</string>
     <string name="ejemplo_de_clases_manejo_de_personas">Ejemplo de Clases\nMANEJO DE PERSONAS\nMódulos 1 y 2</string>
+    <string name="hostname_rest_label">Servidor REST con JWT</string>
 </resources>

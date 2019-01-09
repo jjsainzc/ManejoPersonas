@@ -75,7 +75,6 @@ import static aplicaciones.sainz.jorge.manejopersonas.comunicaciones.JWT.verifyT
  * <p>
  * NOTA: Solo hay uso de ñ en los comentarios, no hay uso de acentos.
  * <p>
- * CEC (Enero-Marzo 2018)
  * <p>
  * <p>
  * <pre>
@@ -490,8 +489,8 @@ public class MainActivity extends AppCompatActivity
             guardarArchivoObjeto();
         }
     }
-    /**
-     * ===========================================================================================
+    /*
+      ===========================================================================================
      */
 
     /**
@@ -584,7 +583,7 @@ public class MainActivity extends AppCompatActivity
      */
     private String leerSOAP() throws IOException, XmlPullParserException {
         Object resultado = null;
-        String hostname = preferenciasPublicas.getString("hostname", "192.168.1.11:8080");
+        String hostname = preferenciasPublicas.getString("hostname", "jjsc.ddns.net:8282");
 
         /*
         Estos parametros se toman del WSDL, no hay automatismo ya que le ejecucion debe ser lo mas
@@ -615,7 +614,7 @@ public class MainActivity extends AppCompatActivity
         Map resultado = new HashMap();
 
         // El hostname y el puerto es usualmente configurado en las preferencias
-        String hostname = preferenciasPublicas.getString("hostname", "192.168.1.11:8080");
+        String hostname = preferenciasPublicas.getString("hostname_rest", "jjsc.ddns.net:8181");
 
 
         /*
