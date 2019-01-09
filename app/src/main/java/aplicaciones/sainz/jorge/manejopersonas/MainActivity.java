@@ -1,11 +1,13 @@
 package aplicaciones.sainz.jorge.manejopersonas;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -15,9 +17,11 @@ import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -356,19 +360,34 @@ public class MainActivity extends AppCompatActivity
             fragmento = Listado.newInstance();
         } else if (id == R.id.guardar_archivo) {
             /*
-            Exportamos a un archivo XML la coleccion que esta en uso
+                Chequea permisos de escritura para >Android 6.0
              */
-            if ((personas != null) && (personas.size() > 0)) {
-                xml = exportaXML();
-                try {
-                    // Guardamos el archivo usando una clase utilitaria
-                    EntradaSalida.writeFile(new File(dirPublico + "/personas.xml"), xml.getBytes());
-                    Toast.makeText(this, R.string.terminado, Toast.LENGTH_SHORT).show();
-                } catch (IOException e) {
-                    alerta(this, "ERROR", e.toString());
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                } else {
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                            1);
                 }
             } else {
-                alerta(this, "ADVERTENCIA", "Lista vacia");
+            /*
+            Exportamos a un archivo XML la coleccion que esta en uso
+            */
+                if ((personas != null) && (personas.size() > 0)) {
+                    xml = exportaXML();
+                    try {
+                        // Guardamos el archivo usando una clase utilitaria
+                        EntradaSalida.writeFile(new File(dirPublico + "/personas.xml"), xml.getBytes());
+                        Toast.makeText(this, R.string.terminado, Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        alerta(this, "ERROR", e.toString());
+                    }
+                } else {
+                    alerta(this, "ADVERTENCIA", "Lista vacia");
+                }
             }
 
         } else if (id == R.id.leer_webservice) {
@@ -506,11 +525,33 @@ public class MainActivity extends AppCompatActivity
     private void guardarArchivoObjeto() {
         Log.i("PERSONAS GUARDAR", String.valueOf(personas.size()));
 
-        File file = new File(dirPrivado + "/" + preferenciasPublicas.getString("nombre_archivo", "fragment_listado.bin"));
-        try {
-            EntradaSalida.escribirArchivoObjeto(file, personas);
-        } catch (IOException e) {
-            Log.e("ERROR", e.toString());
+        /*
+            Chequea permisos de escritura para >Android 6.0
+         */
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+            } else {
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        1);
+
+
+            }
+        } else {
+
+            File file = new File(dirPrivado + "/" + preferenciasPublicas.getString("nombre_archivo", "fragment_listado.bin"));
+            try {
+                EntradaSalida.escribirArchivoObjeto(file, personas);
+            } catch (IOException e) {
+                Log.e("ERROR", e.toString());
+            }
         }
     }
 
